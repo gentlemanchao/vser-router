@@ -7,13 +7,13 @@ vser-router
 3、支持路由缓存；
 
 4、支持路由嵌套，如：
-    <Page>
+    `<Page>
         <Header slot="header">
             <div style="color:#fff;" slot="left">我才是左侧按钮</div>
         </Header>
         <RouterView></RouterView>
         <Footer slot="footer"></Footer>
-    </Page>
+    </Page>`
 
 5、用法：
 
