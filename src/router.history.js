@@ -123,7 +123,8 @@ export default class RouterHistory {
      */
     _getRouteByName(name) {
         const routes = this.options.routes;
-        const find = function (routeName, list) {
+
+        function find(routeName, list) {
             for (let i = 0, len = list.length; i < len; i++) {
                 const item = list[i];
                 if (item.name === routeName) {
@@ -163,7 +164,7 @@ export default class RouterHistory {
     _findRoute(pathArr) {
         const routes = this.options.routes;
         // 匹配路由
-        const matchRoute = function (target, current) {
+        function matchRoute(target, current) {
             let param = {};
             for (let i = 0, len = current.length; i < len; i++) {
                 const segment = current[i].trim(); //当前路由片段
@@ -181,7 +182,7 @@ export default class RouterHistory {
             }
         }
         // 寻找路由
-        const find = function (target, list) {
+        function find(target, list) {
             const length = target.length;
             for (let i = 0, len = list.length; i < len; i++) {
                 const item = list[i];
