@@ -1,6 +1,6 @@
 {
   "name": "vser-router",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "router for vser , integrated with vser for spa",
   "main": "index.js",
   "scripts": {
