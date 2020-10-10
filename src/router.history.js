@@ -2,6 +2,7 @@ export default class RouterHistory {
     constructor(options) {
         const defaults = {
             routes: [], //路由配置
+            base: '', //路由前缀
             pathChange: function (route) {}, //历史改变
             update: function (param) {}, //路由参数更新
             notfound: function (url) {}, //路由未找到
@@ -73,9 +74,9 @@ export default class RouterHistory {
             console.error('请传入跳转目标路径参数')
             return null;
         }
-
+        const base = this.options.base || ''; //路由前缀
         if (to.path) {
-            return to.path;
+            return base + to.path;
         } else if (to.name) {
             const route = this._getRouteByName(to.name);
             if (route) {
@@ -92,7 +93,7 @@ export default class RouterHistory {
                         arr.push(segment);
                     }
                 }
-                return arr.join('/');
+                return base + arr.join('/');
             } else {
                 console.error(`名为"${to.name}"的路由不存在`);
                 return null;
@@ -123,8 +124,7 @@ export default class RouterHistory {
      */
     _getRouteByName(name) {
         const routes = this.options.routes;
-
-        function find(routeName, list) {
+        const find = function (routeName, list) {
             for (let i = 0, len = list.length; i < len; i++) {
                 const item = list[i];
                 if (item.name === routeName) {
@@ -147,7 +147,12 @@ export default class RouterHistory {
      * 获取当前url中的path地址
      */
     getPath() {
-        return location.pathname;
+        let path = location.pathname;
+        if (this.options.base) { //移除路由前缀
+            const reg = new RegExp('^' + this.options.base)
+            path = path.replace(reg, '');
+        }
+        return path;
     }
     /**
      * 解析路径
@@ -164,7 +169,7 @@ export default class RouterHistory {
     _findRoute(pathArr) {
         const routes = this.options.routes;
         // 匹配路由
-        function matchRoute(target, current) {
+        const matchRoute = function (target, current) {
             let param = {};
             for (let i = 0, len = current.length; i < len; i++) {
                 const segment = current[i].trim(); //当前路由片段
@@ -182,7 +187,7 @@ export default class RouterHistory {
             }
         }
         // 寻找路由
-        function find(target, list) {
+        const find = function (target, list) {
             const length = target.length;
             for (let i = 0, len = list.length; i < len; i++) {
                 const item = list[i];

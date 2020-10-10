@@ -7,6 +7,7 @@ export default class Router {
             mode: 'hash', //模式：hash|history
             routes: [], //路由配置
             default: '', //默认路由
+            base: '', //路由前缀 微服务时需要
             pathChange: function (path) {},
             before: function (route, prev) {}, //路由即将进入
             ready: function (route) {}, //路由加载就绪
@@ -37,6 +38,7 @@ export default class Router {
         this.router = null;
         const _opts = {
             routes: options.routes || [], //路由配置
+            base: options.base || '', //路由前缀 微服务时需要
             pathChange: options.pathChange(),
             update: (param) => {
                 this.onUpdate(param);
