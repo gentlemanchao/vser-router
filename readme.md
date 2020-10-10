@@ -26,6 +26,7 @@ vser-router
     const router = new VserRouter({
         mode: 'hash', //模式：hash|history
         routes: [], //路由配置
+        default: '',//默认路由
         pathChange: function (path) {},
         before: function (route, prev) {}, //路由即将进入
         ready: function (route) {}, //路由加载就绪
