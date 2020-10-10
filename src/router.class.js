@@ -14,8 +14,8 @@ export default class Router {
             after: function (route, next) {}, //路由即将离开
             notFound: (path) => {
                 //如果页面参数没有路由信息，则跳转默认路由页面
-                if (!path && this.options.default) {
-                    setTimeout(() => {
+                if (!path) {
+                    this.options.default && setTimeout(() => {
                         this.replace({
                             name: this.options.default
                         });
@@ -23,6 +23,7 @@ export default class Router {
                 } else {
                     console.error(`${path} 当前路由没找到`)
                 }
+
             }, //路由未找到
         }
         this.options = Object.assign(defaults, options);
