@@ -7,7 +7,7 @@ export default class Router {
             mode: 'hash', //模式：hash|history
             routes: [], //路由配置
             default: '', //默认路由
-            base: '', //路由前缀 微服务时需要
+            base: '', //路由前缀,应用的基路径。例如，如果整个单页应用服务在 /app 下，然后 base 就应该设为 "/app"
             pathChange: function (path) {},
             before: function (route, prev) {}, //路由即将进入
             ready: function (route) {}, //路由加载就绪
